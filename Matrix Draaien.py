@@ -29,9 +29,8 @@
 
 # IMPORTS
 
-
 # CONFIG
-LIJST = [
+LIST = [
     ['.', '.', '.', '.', '.', '.'],
     ['.', 'O', 'O', '.', '.', '.'],
     ['O', 'O', 'O', 'O', '.', '.'],
@@ -42,14 +41,6 @@ LIJST = [
     ['.', 'O', 'O', '.', '.', '.'],
     ['.', '.', '.', '.', '.', '.']]
 
-GEDRAAIDE_LIJST = [
-    ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
-    ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
-    ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
-    ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
-    ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
-    ['.', '.', '.', '.', '.', '.', '.', '.', '.']]
-
 
 # AUTHOR INFORMATION
 __author__ = "Tibo Smet"
@@ -57,44 +48,55 @@ __email__ = "tibo.smet@student.kdg.be"
 __status__ = "Development"
 
 
-def print_matrix(m):
-    for regel in m:                                 # de matrix zal overlopen worden voor elke regel die hij bevat
-        for item in regel:                          # de regel zal overlopen worden voor elk item dat het bevat
+def print_array(m):
+    for line in m:                                  # de matrix zal overlopen worden voor elke regel die hij bevat
+        for item in line:                           # de regel zal overlopen worden voor elk item dat het bevat
             print(item, end="")                     # print elk item van de regel op 1 lijn
         print("")                                   # zorgt voor een nieuwe lijn
 
 
 def turn_left():
-    i = 0                                           # Eerste teller voor de lengte van de lijst af te gaan.
-    j = 0                                           # Eerste teller voor de hoogte van de lijst af te gaan.
-    x = len(LIJST)                                  # Variabele die de lengte van de lijst bij houd
-    y = len(LIJST[0])                               # Variabele die de hoogte van de lijst bij houd
+    global LIST
+    rotated_list = []
 
-    while i < x:                                    # while lus voor de lengte van de lijst af te gaan.
-        while j < y:                                # while lus voor de hoogte van de lijst af te gaan.
-            GEDRAAIDE_LIJST[j][i] = LIJST[i][j]     # Item dat op positie i, j staat in LIJST wordt op plaats j, i gezet
-            j += 1                                  # in GEDRAAIDE_LIJST
-        i += 1                                      # Er wordt 1 bijgeteld bij tellers i en j
+    x = len(LIST[0])
+    y = len(LIST)
 
-    print_matrix(GEDRAAIDE_LIJST)                   # De lijst wordt geprint met de methode print_matrix
+    for i in range(y):
+        rotated_list.append([])
+        for j in range(x):
+            rotated_list[-1].append(LIST[j][i])
+
+    return rotated_list
 
 
 def turn_right():
-    print("Moet nog ingevuld worden.")
+    global LIST
+    rotated_list = []
+
+    x = len(LIST[0])
+    y = len(LIST)
+
+    for i in range(x):
+        rotated_list.append([])
+        for j in range(y):
+            rotated_list[-1].append(LIST[j][i])
+
+    return rotated_list
 
 
 def main():
-    print_matrix(LIJST)
+    print_array(LIST)
 
     print("Maak een kezue:")
     print("1. Draai linksom.")
     print("2. Draai rechtsom.")
     keuze = input()
 
-    if keuze == 1:
-        turn_left()
-    elif keuze == 2:
-        turn_right()
+    if keuze == "1":
+        print_array(turn_left())
+    elif keuze == "2":
+        print_array(turn_right())
 
 
 if __name__ == '__main__':
